@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tariq Muhammed | Software Developer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                            950: '#082f49',
+                        },
+                        dark: {
+                            bg: '#050505',
+                            card: '#111111',
+                            border: '#222222',
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .glass-card {
+            background: rgba(17, 17, 17, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.15);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: #38bdf8;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+            margin-left: 2px;
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="antialiased relative selection:bg-brand-500 selection:text-white">
+
+    <!-- Background Effects -->
+    <div class="fixed inset-0 z-[-1] bg-grid-pattern opacity-30 mask-image:linear-gradient(to_bottom,white,transparent)"></div>
+    <div class="fixed top-0 -left-4 w-72 h-72 bg-brand-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob z-[-1]"></div>
+    <div class="fixed top-0 -right-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-2000 z-[-1]"></div>
+    <div class="fixed -bottom-8 left-20 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-4000 z-[-1]"></div>
+
+    <!-- Navbar -->
+    <header class="fixed top-0 w-full z-50 transition-all duration-300" id="navbar">
+        <div class="absolute inset-0 bg-dark-bg/80 backdrop-blur-md border-b border-white/5 shadow-lg"></div>
+        <div class="container mx-auto px-6 py-4 relative z-10 flex justify-between items-center max-w-6xl">
+            <a href="#" class="text-xl font-bold font-mono tracking-tighter group">
+                <span class="text-brand-400">&lt;</span>Tariq<span class="text-brand-400">/&gt;</span>
+            </a>
+            
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-300">
+                <a href="#about" class="hover:text-brand-400 transition-colors">About</a>
+                <a href="#experience" class="hover:text-brand-400 transition-colors">Experience</a>
+                <a href="#projects" class="hover:text-brand-400 transition-colors">Projects</a>
+                <a href="#skills" class="hover:text-brand-400 transition-colors">Skills</a>
+                <a href="#contact" class="hover:text-brand-400 transition-colors">Contact</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-gray-300 hover:text-white focus:outline-none" id="mobile-menu-btn">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Nav -->
+        <div class="md:hidden hidden absolute top-full left-0 w-full bg-dark-bg/95 backdrop-blur-xl border-b border-white/5 shadow-xl" id="mobile-menu">
+            <div class="flex flex-col px-6 py-4 space-y-4 text-center">
+                <a href="#about" class="text-gray-300 hover:text-brand-400 transition-colors block mobile-link">About</a>
+                <a href="#experience" class="text-gray-300 hover:text-brand-400 transition-colors block mobile-link">Experience</a>
+                <a href="#projects" class="text-gray-300 hover:text-brand-400 transition-colors block mobile-link">Projects</a>
+                <a href="#skills" class="text-gray-300 hover:text-brand-400 transition-colors block mobile-link">Skills</a>
+                <a href="#contact" class="text-gray-300 hover:text-brand-400 transition-colors block mobile-link">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-20 pb-10" id="home">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-3/5 space-y-6 z-10 animate-fade-in-up">
+                    <p class="font-mono text-brand-400 mb-2">Hi, my name is</p>
+                    <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-white">
+                        Tariq Muhammed.
+                    </h1>
+                    <h2 class="text-3xl md:text-5xl font-bold text-gray-400">
+                        I build <span id="typed-text" class="text-gradient"></span><span class="typing-cursor"></span>
+                    </h2>
+                    <p class="text-gray-400 text-lg md:text-xl max-w-2xl leading-relaxed pt-4">
+                        Aspiring AI/ML Developer and Full-Stack Engineer. I specialize in building scalable tools, discord bots (10k+ servers), and data-driven solutions, bridging community platforms with machine learning.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 pt-6">
+                        <a href="#contact" class="px-8 py-3 rounded-full bg-brand-500 hover:bg-brand-600 text-white font-medium transition-all shadow-[0_0_20px_rgba(14,165,233,0.3)] hover:shadow-[0_0_30px_rgba(14,165,233,0.5)] transform hover:-translate-y-1">
+                            Get In Touch
+                        </a>
+                        <a href="https://github.com/Tari-dev" target="_blank" class="px-8 py-3 rounded-full bg-dark-card border border-dark-border hover:border-gray-500 text-white font-medium transition-all flex items-center gap-2 transform hover:-translate-y-1">
+                            <i class="fa-brands fa-github text-lg"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-2/5 flex justify-center md:justify-end reveal relative z-10">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden border border-white/10 group">
+                        <!-- Placeholder for Profile Image, using a nice gradient/abstract for now -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-900 to-indigo-900 flex items-center justify-center">
+                            <i class="fa-solid fa-code text-6xl text-brand-400 opacity-50 group-hover:scale-110 transition-transform duration-500"></i>
+                        </div>
+                        <div class="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl"></div>
+                        <!-- Overlay effect -->
+                        <div class="absolute inset-0 bg-brand-500 mix-blend-overlay opacity-20 group-hover:opacity-0 transition-opacity duration-500"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20 bg-dark-card/30 border-y border-white/5" id="about">
+        <div class="container mx-auto px-6 max-w-6xl reveal">
+            <div class="flex items-center gap-4 mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold"><span class="text-brand-400 font-mono text-2xl">01.</span> About Me</h2>
+                <div class="h-[1px] bg-dark-border flex-grow max-w-xs"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="space-y-6 text-gray-400 leading-relaxed text-lg">
+                    <p>
+                        I'm a passionate developer currently pursuing a <strong class="text-white">B.Tech in Computer Science with a Specialization in AI and Data Science</strong> at IIIT Kottayam. 
+                    </p>
+                    <p>
+                        My journey bridges the gap between complex AI algorithms and user-centric applications. I have a proven track record of building scalable solutions, from highly adopted Discord bots like <strong class="text-brand-400">Roku</strong> (used in 10k+ servers) to organizing platforms like <strong class="text-brand-400">Rinkoe</strong>.
+                    </p>
+                    <p>
+                        I thrive on open-source collaboration, hands-on automation, and deploying production-ready tools using modern cloud infrastructure.
+                    </p>
+                    <div class="pt-4 flex items-center gap-4">
+                        <i class="fa-solid fa-location-dot text-brand-400 text-xl"></i>
+                        <span class="text-white">Based in Kerala, India</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-file-pdf text-brand-400 text-xl"></i>
+                        <span class="text-sm italic text-gray-500">Details referenced from Tariq_s_resume-1.pdf</span>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-32 bg-brand-500/10 rounded-bl-full -z-10 group-hover:bg-brand-500/20 transition-colors duration-500"></div>
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                        <i class="fa-solid fa-graduation-cap text-brand-400"></i> Education
+                    </h3>
+                    
+                    <div class="relative pl-6 border-l-2 border-dark-border">
+                        <div class="absolute w-4 h-4 bg-dark-bg border-2 border-brand-400 rounded-full -left-[9px] top-1"></div>
+                        <h4 class="text-lg font-bold text-white">B.Tech Computer Science</h4>
+                        <p class="text-brand-400 text-sm font-medium mb-2">Specialization in AI & Data Science</p>
+                        <p class="text-gray-300 font-medium mb-1">Indian Institute of Information Technology, Kottayam</p>
+                        <p class="text-gray-500 text-sm mb-4"><i class="fa-regular fa-calendar mr-2"></i> Sept 2023 - Present</p>
+                        <p class="text-gray-400 text-sm">
+                            Focusing on machine learning algorithms, data structures, and applying theoretical concepts to real-world software engineering challenges.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="py-24" id="experience">
+        <div class="container mx-auto px-6 max-w-6xl reveal">
+            <div class="flex items-center gap-4 mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold"><span class="text-brand-400 font-mono text-2xl">02.</span> Experience</h2>
+                <div class="h-[1px] bg-dark-border flex-grow max-w-xs"></div>
+            </div>
+            
+            <div class="relative max-w-4xl mx-auto">
+                <!-- Timeline Line -->
+                <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-brand-500/50 via-dark-border to-transparent"></div>
+                
+                <!-- Experience Item -->
+                <div class="relative flex flex-col md:flex-row items-center justify-between mb-12 w-full">
+                    <div class="hidden md:block w-5/12 text-right pr-8">
+                        <h3 class="text-xl font-bold text-white">Junior Software Developer</h3>
+                        <p class="text-brand-400 font-medium">SkoolOfCode</p>
+                        <p class="text-gray-500 text-sm mt-1"><i class="fa-regular fa-calendar mr-2"></i> Aug 2025 - Jan 2026</p>
+                    </div>
+                    
+                    <!-- Timeline Dot -->
+                    <div class="absolute left-0 md:left-1/2 transform -translate-x-[4px] md:-translate-x-1/2 w-4 h-4 rounded-full bg-brand-500 ring-4 ring-dark-bg z-10 shadow-[0_0_10px_#38bdf8]"></div>
+                    
+                    <div class="w-full md:w-5/12 pl-8 md:pl-8 mt-4 md:mt-0">
+                        <div class="md:hidden mb-3">
+                            <h3 class="text-xl font-bold text-white">Junior Software Developer</h3>
+                            <p class="text-brand-400 font-medium">SkoolOfCode</p>
+                            <p class="text-gray-500 text-sm mt-1">Aug 2025 - Jan 2026</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl hover:border-brand-500/50 transition-colors">
+                            <ul class="space-y-3 text-gray-400 text-sm">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-brand-400 mt-1"></i>
+                                    <span>Built and deployed AI-driven features for an edtech platform, contributing across full-stack and AWS production.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-brand-400 mt-1"></i>
+                                    <span>Engineered an AI Course/Lesson Plan Generator & AI Tutor that delivers adaptive lessons via chat.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-brand-400 mt-1"></i>
+                                    <span>Developed tools using Google Workspace API to auto-generate Slides and Docs from prompts.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Internship Entry -->
+                <div class="relative flex flex-col md:flex-row items-center justify-between w-full">
+                    <div class="w-full md:w-5/12 pl-8 md:pr-8 md:pl-0 text-left md:text-right mt-4 md:mt-0 order-2 md:order-1">
+                        <div class="md:hidden mb-3">
+                            <h3 class="text-xl font-bold text-white">Software Developer Intern</h3>
+                            <p class="text-gray-400 font-medium">SkoolOfCode</p>
+                            <p class="text-gray-500 text-sm mt-1">May 2025 - July 2025</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl hover:border-brand-500/50 transition-colors">
+                            <ul class="space-y-3 text-gray-400 text-sm md:text-right">
+                                <li class="flex items-start gap-2 md:flex-row-reverse">
+                                    <i class="fa-solid fa-angle-right text-brand-400 mt-1 md:rotate-180"></i>
+                                    <span>Enhanced an existing code editor to support multiple languages including C++ and Java.</span>
+                                </li>
+                                <li class="flex items-start gap-2 md:flex-row-reverse">
+                                    <i class="fa-solid fa-angle-right text-brand-400 mt-1 md:rotate-180"></i>
+                                    <span>Created an AI-powered document parser with OCR to auto-fill assessments from PDFs and images.</span>
+                                </li>
+                                <li class="flex items-start gap-2 md:flex-row-reverse">
+                                    <i class="fa-solid fa-angle-right text-brand-400 mt-1 md:rotate-180"></i>
+                                    <span>Built a chat-based assessment system with AI simulation to preview student interactions.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Dot -->
+                    <div class="absolute left-0 md:left-1/2 transform -translate-x-[4px] md:-translate-x-1/2 w-4 h-4 rounded-full bg-dark-bg border-2 border-brand-500 z-10 order-1 md:order-2"></div>
+                    
+                    <div class="hidden md:block w-5/12 pl-8 order-3">
+                        <h3 class="text-xl font-bold text-white">Software Developer Intern</h3>
+                        <p class="text-gray-400 font-medium">SkoolOfCode</p>
+                        <p class="text-gray-500 text-sm mt-1"><i class="fa-regular fa-calendar mr-2"></i> May 2025 - July 2025</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="py-24 bg-dark-card/30 border-y border-white/5" id="projects">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="flex items-center gap-4 mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold"><span class="text-brand-400 font-mono text-2xl">03.</span> Featured Projects</h2>
+                <div class="h-[1px] bg-dark-border flex-grow max-w-xs"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Roku -->
+                <div class="glass-card rounded-2xl overflow-hidden flex flex-col h-full reveal group">
+                    <div class="h-48 bg-gradient-to-br from-indigo-900 to-brand-900 relative p-6 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <i class="fa-brands fa-discord text-4xl text-white/80 group-hover:text-white transition-colors"></i>
+                            <a href="https://github.com/rokubot" target="_blank" class="text-white/60 hover:text-white transition-colors">
+                                <i class="fa-brands fa-github text-2xl"></i>
+                            </a>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">Roku Bot</h3>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <p class="text-brand-400 text-xs font-mono mb-2">May 2020 - Present</p>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">
+                            A powerful, multi-purpose, all-in-one Discord bot built to enhance and redefine the Discord experience.
+                        </p>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i class="fa-solid fa-server text-brand-500 w-4"></i> Used in over 10,000+ servers
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i class="fa-solid fa-code-branch text-brand-500 w-4"></i> Open source at rokubot org
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-mono text-gray-300">Python</span>
+                            <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-mono text-gray-300">Discord.py</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rinkoe -->
+                <div class="glass-card rounded-2xl overflow-hidden flex flex-col h-full reveal group" style="transition-delay: 100ms;">
+                    <div class="h-48 bg-gradient-to-br from-emerald-900 to-teal-900 relative p-6 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <i class="fa-solid fa-link text-4xl text-white/80 group-hover:text-white transition-colors"></i>
+                            <a href="#" class="text-white/60 hover:text-white transition-colors">
+                                <i class="fa-solid fa-external-link-alt text-xl"></i>
+                            </a>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">Rinkoe</h3>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <p class="text-brand-400 text-xs font-mono mb-2">Nov 2023 - Present</p>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">
+                            A platform to create personalized collections effortlessly. Organize your favorite links and resources all in one place with an intuitive interface.
+                        </p>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i class="fa-solid fa-users text-teal-500 w-4"></i> Over 10k+ visits monthly
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i class="fa-brands fa-chrome text-teal-500 w-4"></i> Launched Browser Extension
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-mono text-gray-300">Full-Stack</span>
+                            <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-mono text-gray-300">Web Extension</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tableascii -->
+                <div class="glass-card rounded-2xl overflow-hidden flex flex-col h-full reveal group" style="transition-delay: 200ms;">
+                    <div class="h-48 bg-gradient-to-br from-orange-900 to-red-900 relative p-6 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <i class="fa-solid fa-table text-4xl text-white/80 group-hover:text-white transition-colors"></i>
+                            <a href="#" class="text-white/60 hover:text-white transition-colors">
+                                <i class="fa-brands fa-python text-2xl"></i>
+                            </a>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">Tableascii</h3>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <p class="text-brand-400 text-xs font-mono mb-2">2025</p>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">
+                            A simple, lightweight, no-dependency Python library to create clean ASCII Tables for CLI tools and data reporting.
+                        </p>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i class="fa-solid fa-box-open text-orange-500 w-4"></i> Published to PYPI
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i class="fa-solid fa-book text-orange-500 w-4"></i> Documented with MkDocs
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-mono text-gray-300">Python</span>
+                            <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-mono text-gray-300">Open Source</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Certifications Section -->
+    <section class="py-24" id="skills">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="flex items-center gap-4 mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold"><span class="text-brand-400 font-mono text-2xl">04.</span> Tech Arsenal</h2>
+                <div class="h-[1px] bg-dark-border flex-grow max-w-xs"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Skills Categorized -->
+                <div class="space-y-8 reveal">
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-terminal text-brand-400"></i> Languages
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">Python</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">C/C++</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">Java</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">JavaScript/TypeScript</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">PHP</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-laptop-code text-brand-400"></i> Frontend
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">React</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">Angular</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">Tailwind CSS</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">SASS/SCSS</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">Chakra UI</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-server text-brand-400"></i> Backend & DB
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">Flask</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">Django</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">FastAPI</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">MongoDB</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">PostgreSQL</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">Supabase</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-cloud text-brand-400"></i> Tools & Cloud
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">Git & Docker</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">AWS & GCP & Azure</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">Vercel & Hetzner</span>
+                            <span class="px-4 py-2 bg-dark-card border border-dark-border rounded-lg text-sm text-gray-300 hover:border-brand-400 transition-colors cursor-default">Figma & Postman</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="glass-card p-8 rounded-2xl h-fit reveal" style="transition-delay: 200ms;">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <i class="fa-solid fa-certificate text-brand-400"></i> Certifications & Badges
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <a href="https://drive.google.com/file/d/1OJjZQiO5Vwnd5y5R5eHoYCwk71pls0m1/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="flex items-start justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-brand-500/30 transition-all group/cert block">
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 w-10 h-10 rounded-full bg-brand-500/20 flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-award text-brand-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium group-hover/cert:text-brand-400 transition-colors flex items-center gap-2">
+                                        Certificate of Internship
+                                        <i class="fa-solid fa-external-link-alt text-xs text-gray-500 group-hover/cert:text-brand-400 transition-colors"></i>
+                                    </h4>
+                                    <p class="mt-1 text-sm text-gray-400">SkoolOfCode</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                            <div class="mt-1 w-10 h-10 rounded-full bg-[#4285F4]/20 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-brands fa-google text-[#4285F4]"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">Google Cloud Skill Boosts</h4>
+                                <ul class="mt-2 space-y-1 text-sm text-gray-400 list-disc list-inside">
+                                    <li>Networking Fundamentals on GC</li>
+                                    <li>Monitoring in Google Cloud</li>
+                                    <li>Analyze Images with Cloud Vision API</li>
+                                    <li>Develop GenAI Apps with Gemini & Streamlit</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-language text-brand-400"></i> Languages
+                        </h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="text-gray-300 text-sm"><strong class="text-white">English</strong> (Fluent)</span>
+                            <span class="text-gray-300 text-sm"><strong class="text-white">Malayalam</strong> (Native)</span>
+                            <span class="text-gray-300 text-sm"><strong class="text-white">Hindi/Urdu</strong> (Conversational)</span>
+                            <span class="text-gray-300 text-sm"><strong class="text-white">Arabic</strong> (Readable)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-24 bg-dark-card/30 border-t border-white/5" id="contact">
+        <div class="container mx-auto px-6 max-w-4xl text-center reveal">
+            <p class="font-mono text-brand-400 mb-4">05. What's Next?</p>
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Get In Touch</h2>
+            <p class="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">
+                Whether you have a question, a project proposal, or just want to say hi, feel free to reach out on LinkedIn or check out my work on GitHub! Currently exploring new opportunities in AI/ML and Full-Stack Development.
+            </p>
+            <a href="https://linkedin.com/in/Tari-dev" target="_blank" class="inline-block px-8 py-4 rounded-full bg-transparent border-2 border-brand-500 text-brand-400 font-bold hover:bg-brand-500 hover:text-white transition-all transform hover:-translate-y-1">
+                Connect on LinkedIn <i class="fa-brands fa-linkedin-in ml-2"></i>
+            </a>
+            
+            <div class="flex justify-center gap-6 mt-16">
+                <a href="https://github.com/Tari-dev" target="_blank" class="w-12 h-12 rounded-full bg-dark-bg border border-dark-border flex items-center justify-center text-gray-400 hover:text-white hover:border-brand-400 hover:shadow-[0_0_15px_rgba(56,189,248,0.5)] transition-all" title="GitHub">
+                    <i class="fa-brands fa-github text-xl"></i>
+                </a>
+                <a href="https://linkedin.com/in/Tari-dev" target="_blank" class="w-12 h-12 rounded-full bg-dark-bg border border-dark-border flex items-center justify-center text-gray-400 hover:text-white hover:border-brand-400 hover:shadow-[0_0_15px_rgba(56,189,248,0.5)] transition-all" title="LinkedIn">
+                    <i class="fa-brands fa-linkedin-in text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center border-t border-white/5 bg-dark-bg">
+        <p class="text-sm font-mono text-gray-500">
+            Designed & Built by <span class="text-brand-400">Tariq Muhammed</span>
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
+            });
+
+            // Close mobile menu on link click
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                });
+            });
+
+            // Navbar Background on Scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-lg');
+                } else {
+                    navbar.classList.remove('shadow-lg');
+                }
+            });
+
+            // Scroll Reveal Animation via Intersection Observer
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Run once
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+
+            // Typing Effect Logic
+            const typedTextElement = document.getElementById('typed-text');
+            const phrases = [
+                "AI/ML Solutions.",
+                "Full-Stack Apps.",
+                "Scalable Bots.",
+                "Data-Driven Tools."
+            ];
+            
+            let phraseIndex = 0;
+            let letterIndex = 0;
+            let currentPhrase = "";
+            let isDeleting = false;
+            let typeSpeed = 100;
+
+            function typeEffect() {
+                const fullPhrase = phrases[phraseIndex];
+                
+                if (isDeleting) {
+                    currentPhrase = fullPhrase.substring(0, letterIndex - 1);
+                    letterIndex--;
+                    typeSpeed = 50; // Faster deleting
+                } else {
+                    currentPhrase = fullPhrase.substring(0, letterIndex + 1);
+                    letterIndex++;
+                    typeSpeed = 100; // Normal typing
+                }
+                
+                typedTextElement.textContent = currentPhrase;
+                
+                // If word is complete
+                if (!isDeleting && currentPhrase === fullPhrase) {
+                    isDeleting = true;
+                    typeSpeed = 2000; // Pause at end of word
+                } else if (isDeleting && currentPhrase === "") {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    typeSpeed = 500; // Pause before new word
+                }
+                
+                setTimeout(typeEffect, typeSpeed);
+            }
+            
+            // Start typing effect
+            setTimeout(typeEffect, 1000);
+        });
+    </script>
+</body>
+</html>
